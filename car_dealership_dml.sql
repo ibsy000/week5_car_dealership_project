@@ -55,6 +55,18 @@ CALL add_address('321 Bunny Ave.', 'Ozark', 'Missouri', 65721);
 
 CALL add_address('789 Elephant Ln.', 'Hollister', 'Missouri', 65672);
 
+CALL add_address('9353 Lake Shore Dr.', 'Reeds Spring', 'Missouri', 65737);
+
+CALL add_address('22 Pizza Pie Cir.', 'Kimberling City', 'Missouri', 65686);
+
+CALL add_address('76 Disco Ln.', 'Branson', 'Missouri', 65616);
+
+CALL add_address('911 Fire Ave.', 'Hollister', 'Missouri', 65672);
+
+CALL add_address('5839 Fisherman Dr.', 'Branson West', 'Missouri', 65737);
+
+CALL add_address('444 Boat Dock Rd.', 'Walnut Shade', 'Missouri', 65771);
+
 
 
 
@@ -117,23 +129,123 @@ CALL add_customer('Susan', 'Strawberry', '(417)444-6666', 'haveaberrygoodday@gma
 
 
 
+-- Insert a row of data into SALESPERSON table
+INSERT INTO salesperson(
+	first_name,
+	last_name,
+	phone_number,
+	email,
+	address_id
+)
+VALUES (
+	'Ronald',
+	'Swanson',
+	'(417)321-4567',
+	'sellcarsforever@company.com',
+	4
+);
 
 
 
 
 
+-- Create PROCEDURE to add more rows to salesperson table
+CREATE OR REPLACE PROCEDURE add_salesperson(
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	phone_number VARCHAR(20),
+	email VARCHAR(100),
+	address_id INTEGER)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO salesperson(
+	first_name,
+	last_name,
+	phone_number,
+	email,
+	address_id)
+VALUES (
+	first_name,
+	last_name,
+	phone_number,
+	email,
+	address_id);
+END;
+$$;	
 
 
 
 
 
+-- Call ADD_SALESPERSON procedure to add another salesperson to the SALESPERSON TABLE
+CALL add_salesperson('Henry', 'Haystack', '(417)789-4563', 'makinmoney@company.com', 5);
+
+CALL add_salesperson('Dorothy', 'Lantern', '(417)734-1257', 'lightingupthenight@company.com', 6);
 
 
 
 
 
+-- Insert a row of data into MECHANIC table
+INSERT INTO mechanic(
+	first_name,
+	last_name,
+	phone_number,
+	email,
+	address_id
+)
+VALUES (
+	'Joe',
+	'Waters',
+	'(417)334-2751',
+	'fixincarsforlyfe@company.com',
+	7
+);
 
 
+
+
+
+-- Create PROCEDURE to add more rows to mechanic table
+CREATE OR REPLACE PROCEDURE add_mechanic(
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	phone_number VARCHAR(20),
+	email VARCHAR(100),
+	address_id INTEGER)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	INSERT INTO mechanic(
+	first_name,
+	last_name,
+	phone_number,
+	email,
+	address_id)
+VALUES (
+	first_name,
+	last_name,
+	phone_number,
+	email,
+	address_id);
+END;
+$$;	
+
+
+
+
+
+-- Call ADD_MECHANIC procedure to add another mechanic to the MECHANIC TABLE
+CALL add_mechanic('Janet', 'Cruze', '(417)772-8264', 'letsgoforacruze@company.com', 8);
+
+CALL add_mechanic('Lance', 'Notstong', '(417)228-4512', 'imnotstrong@company.com', 9);
+
+
+
+
+
+-- Insert a row of data into MECHANIC table
 
 
 
