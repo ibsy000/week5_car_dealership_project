@@ -65,11 +65,7 @@ CREATE TABLE service_ticket(
 	service_ticket_id SERIAL PRIMARY KEY,
 	service_name VARCHAR(50),
 	price NUMERIC(6,2),
-	service_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	customer_car_id INTEGER NOT NULL,
-	FOREIGN KEY(customer_car_id) REFERENCES customer_car(customer_car_id),
-	service_history_id INTEGER NOT NULL,
-	FOREIGN KEY(service_history_id) REFERENCES service_history(service_history_id)
+	service_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -171,9 +167,7 @@ ADD FOREIGN KEY(customer_car_id) REFERENCES customer_car(customer_car_id);
 
 
 
--- Decided to drop column SERVICE_HISTORY_ID from SERVICE_TICKET table
-ALTER TABLE service_ticket 
-DROP COLUMN service_history_id;
+
 
 
 

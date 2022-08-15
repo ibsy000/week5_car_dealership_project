@@ -404,15 +404,37 @@ CALL add_car_inventory(2017, 'GMC', 'Sierra 1500', 'Pickup', 'Red', FALSE, 22988
 
 
 
+-- Now let's say a couple of cars get sold
+UPDATE car_inventory 
+SET customer_id = 4, salesperson_id = 2
+WHERE car_inventory_id = 3;
+
+
+UPDATE car_inventory 
+SET customer_id = 5, salesperson_id = 3
+WHERE car_inventory_id = 6;
 
 
 
 
 
+-- Now let's create a couple of invoices for the sold cars
+INSERT INTO invoice(car_inventory_id, salesperson_id, customer_id)
+VALUES (3, 2, 4), (6, 3, 5);
 
 
 
 
+
+-- Now let's get some mechanics working on customer cars
+INSERT INTO car_mechanic(customer_car_id, mechanic_id)
+VALUES (1,3), (1,2), (2,1), (3,2), (3,1), (3,3);
+
+
+
+
+
+-- Insert a row of data into SERVICE_TICKET table
 
 
 
