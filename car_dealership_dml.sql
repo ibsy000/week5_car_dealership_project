@@ -67,6 +67,10 @@ CALL add_address('5839 Fisherman Dr.', 'Branson West', 'Missouri', 65737);
 
 CALL add_address('444 Boat Dock Rd.', 'Walnut Shade', 'Missouri', 65771);
 
+CALL add_address('6754 Blueberry Cir.', 'Nixa', 'Missouri', 65714);
+
+CALL add_address('57 Shoelace Blvd.', 'Spokane', 'Missouri', 65754);
+
 
 
 
@@ -124,6 +128,10 @@ $$;
 CALL add_customer('Benjamin', 'Crackerjack', '(417)222-3333', 'ben.crackerjack369@gmail.com', 2);
 
 CALL add_customer('Susan', 'Strawberry', '(417)444-6666', 'haveaberrygoodday@gmail.com', 3);
+
+CALL add_customer('Theodore', 'Mcintosh', '(417)669-2458', 'callmeteddy@gmail.com', 10);
+
+CALL add_customer('Mary', 'Burger', '(417)272-4524', 'mmmburgers@gmail.com', 11);
 
 
 
@@ -245,10 +253,152 @@ CALL add_mechanic('Lance', 'Notstong', '(417)228-4512', 'imnotstrong@company.com
 
 
 
--- Insert a row of data into MECHANIC table
+-- Insert a row of data into CUSTOMER_CAR table
+INSERT INTO customer_car(
+	year,
+	make,
+	model,
+	body_type,
+	color,
+	serial_number,
+	customer_id
+)
+VALUES (
+	2020,
+	'Tesla',
+	'Model 3',
+	'Electric',
+	'White',
+	'5Y2FH12548Z569489',
+	1
+);
 
 
 
+
+
+-- Create PROCEDURE to add more rows to customer_car table
+CREATE OR REPLACE PROCEDURE add_customer_car(
+	year NUMERIC(4),
+	make VARCHAR(20),
+	model VARCHAR(25),
+	body_type VARCHAR(10),
+	color VARCHAR(10),
+	serial_number VARCHAR(17),
+	customer_id INTEGER)
+LANGUAGE plpgsql
+AS $$
+BEGIN 
+	INSERT INTO customer_car(
+	year,
+	make,
+	model,
+	body_type,
+	color,
+	serial_number,
+	customer_id)
+VALUES (
+	year,
+	make,
+	model,
+	body_type,
+	color,
+	serial_number,
+	customer_id);
+END;
+$$;
+
+
+
+
+
+-- Call ADD_CUSTOMER_CAR procedure to add another customer_car to the CUSTOMER_CAR TABLE
+CALL add_customer_car(2019, 'Chevrolet', 'Silverado 1500 Double Cab', 'Pickup', 'Blue', '7G3JD13688K246839', 2);
+
+CALL add_customer_car(2013, 'Volkswagen', 'Beetle', 'Hatchback', 'Red', '2D7FY25948Z277338', 3);
+
+
+
+
+
+-- Insert a row of data into CAR_INVENTORY table
+INSERT INTO car_inventory(
+	year,
+	make,
+	model,
+	body_type,
+	color,
+	new_car,
+	price,
+	serial_number
+)
+VALUES (
+	2022,
+	'Toyota',
+	'RAV4',
+	'SUV',
+	'Black',
+	TRUE,
+	30864.00,
+	'7Z4BY26449H893562'
+);
+
+
+
+
+
+-- Create PROCEDURE to add more rows to car_inventory table
+CREATE OR REPLACE PROCEDURE add_car_inventory(
+	year NUMERIC(4),
+	make VARCHAR(20),
+	model VARCHAR(25),
+	body_type VARCHAR(10),
+	color VARCHAR(10),
+	new_car BOOLEAN,
+	price NUMERIC(8,2),
+	serial_number VARCHAR(17))
+LANGUAGE plpgsql
+AS $$
+BEGIN 
+	INSERT INTO car_inventory(
+	year,
+	make,
+	model,
+	body_type,
+	color,
+	new_car,
+	price,
+	serial_number)
+VALUES (
+	year,
+	make,
+	model,
+	body_type,
+	color,
+	new_car,
+	price,
+	serial_number);
+END;
+$$;
+
+
+
+
+
+-- Call ADD_CAR_INVENTORY procedure to add another car to the CAR_INVENTORY TABLE
+CALL add_car_inventory(2022, 'Ford', 'Edge', 'SUV', 'Gray', TRUE, 37327.00, '3F3HD56438Z256389');
+
+CALL add_car_inventory(2018, 'Dodge', 'Ram', 'Pickup', 'White', FALSE, 24999.00, '5H2DS83738F356361');
+
+CALL add_car_inventory(2016, 'Mercedez-Benz', 'CLS 400', 'Sedan', 'Silver', FALSE, 36999.00, '8G9FZ35238J234319');
+
+CALL add_car_inventory(2018, 'Dodge', 'Journey', 'Van', 'White', FALSE, 11998.00, '4Z6FG83733F233462');
+
+CALL add_car_inventory(2022, 'Toyota', 'Prius', 'Hatchback', 'Black', TRUE, 32474.00, '1G6FZ83662G263780');
+
+CALL add_car_inventory(2023, 'Kia', 'Forte', 'Sedan', 'Silver', TRUE, 27255.00, '7H4DL43380F136791');
+
+CALL add_car_inventory(2017, 'GMC', 'Sierra 1500', 'Pickup', 'Red', FALSE, 22988.00, '2K3SH63900Z218526');
 
 
 
