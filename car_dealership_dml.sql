@@ -435,17 +435,68 @@ VALUES (1,3), (1,2), (2,1), (3,2), (3,1), (3,3);
 
 
 -- Insert a row of data into SERVICE_TICKET table
+INSERT INTO service_ticket(service_name, price, service_date)
+VALUES ('Brakes', '169.99', NOW());
+
+INSERT INTO service_ticket(service_name, price, service_date)
+VALUES ('Oil Change', '79.99', NOW());
+
+INSERT INTO service_ticket(service_name, price, service_date)
+VALUES ('Battery Charge', '29.99', NOW());
+
+INSERT INTO service_ticket(service_name, price, service_date)
+VALUES ('Tune Up', '139.99', NOW());
+
+INSERT INTO service_ticket(service_name, price, service_date)
+VALUES ('Tire Alignment', '69.99', NOW());
+
+INSERT INTO service_ticket(service_name, price, service_date)
+VALUES ('Oil Change', '79.99', NOW());
 
 
 
 
 
+-- Create PROCEDURE to add more rows to service_ticket table
+CREATE OR REPLACE PROCEDURE add_service_ticket(
+	service_name VARCHAR(50),
+	price NUMERIC(6,2),
+	service_date TIMESTAMP
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN 
+	INSERT INTO service_ticket(
+	service_name, 
+	price, 
+	service_date)
+VALUES (
+	service_name, 
+	price, 
+	service_date);
+END;
+$$;
 
 
 
 
 
+-- Call ADD_SERVICE_TICKET procedure to add another service_ticket to the SERVICE_TICKET TABLE
+--CALL add_service_ticket('Oil Change', 79.99, NOW());
+-- I'm not sure why calling this procedure is not working, I keep getting an error
 
+
+
+
+
+-- Now let's match the SERVICE_TICKET to the CUSTOMER_CAR_ID by adding the info to the SERVICE_HISTORY table
+INSERT INTO service_history(customer_car_id, service_ticket_id)
+VALUES (1,1), (1,2), (2,3), (3,4), (3,5), (3,6);
+
+
+
+-- And I think that's it!! 
+-- SUCCESS!
 
 
 
